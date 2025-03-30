@@ -1,0 +1,51 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CALC-TOTAL.
+       *> Learning INPUT/ OUTPUT
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+
+       01  USER-INPUT.
+           05  USER-NAME                   PIC X(15).
+           05  PURCHASE1                   PIC 9(5).
+           05  PURCHASE2                   PIC 9(5).
+           05  PURCHASE3                   PIC 9(5).
+
+       01  OUTPUT-DATA.
+           05  NAME-OUT                    PIC X(15).
+           05  FINAL-TOTAL                 PIC 9(6).
+
+       01  CONTINUE-INPUT                  PIC X(3) VALUE 'YES'.
+
+       PROCEDURE DIVISION.
+
+       100-MAIN.
+           PERFORM UNTIL CONTINUE-INPUT = 'NO '
+               DISPLAY 'ENTER FULL NAME (15 CHARACTERS)'
+               ACCEPT USER-NAME
+
+               DISPLAY 'Enter first purchase amount (5 digits)'
+               ACCEPT PURCHASE1
+
+               DISPLAY 'Enter second purchase amount (5 digits)'
+               ACCEPT PURCHASE2
+
+               DISPLAY 'Enter third purchase amount (5 digits)'
+               ACCEPT PURCHASE3
+
+               MOVE USER-NAME TO NAME-OUT
+               ADD PURCHASE1 PURCHASE2 PURCHASE3
+                   GIVING FINAL-TOTAL
+
+               DISPLAY NAME-OUT ' Total Purchase Amount = ' FINAL-TOTAL
+               DISPLAY 'MORE INPUT DATA (YES/NO)?'
+
+               ACCEPT CONTINUE-INPUT
+               INSPECT CONTINUE-INPUT CONVERTING 'noyes' TO 'NOYES'
+
+               IF CONTINUE-INPUT = 'NO ' THEN
+                   DISPLAY 'PROGRAM TERMINATED.'
+                   STOP RUN
+               END-IF
+           END-PERFORM.
+           STOP RUN.

@@ -1,0 +1,25 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       77 SOMEVAL PIC 999 VALUE 0.
+
+       PROCEDURE DIVISION.
+
+       MAIN-PARA.
+           IF SOMEVAL + 10 > 11 THEN
+               DISPLAY "NO."
+               PERFORM B-Para
+           ELSE
+               DISPLAY "YES."
+               PERFORM A-Para.
+
+           STOP RUN.
+
+       A-Para.
+           DISPLAY "ACTION 1: " SOMEVAL.
+
+       B-Para.
+           DISPLAY "ACTION 2: " SOMEVAL.
+           EXIT.

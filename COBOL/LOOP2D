@@ -1,0 +1,17 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TwoDLoop.
+       *> 2D loop
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  I PIC 9 VALUE 0.
+       01  J PIC 9 VALUE 0.
+
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
+               PERFORM VARYING J FROM 1 BY 1 UNTIL J > 5
+                   DISPLAY I " " J
+               END-PERFORM
+           END-PERFORM.
+
+           STOP RUN.

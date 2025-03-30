@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO-WORLD.
+       *> Hello World COBOL  
+       *> Sandbox. Learn how to call paragraphs.
+       *> Compute arithmetic. Loops.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           77 X PIC 99.
+           77 Y PIC 99.
+           77 Z PIC 99.
+
+           *> Variables for arithmetic operations
+           77 resultAdd PIC 999.
+           77 hello PIC X(6) VALUE "HELLO!".
+
+       PROCEDURE DIVISION.
+
+       MAIN-PROCEDURE.
+           SET X TO 10.
+           SET Y TO 25.
+
+           ADD X Y GIVING Z.
+           DISPLAY "X + Y = " Z.
+
+           PERFORM AddTwoNumbers THRU DisplayResult.
+
+           PERFORM DisplayHello 3 TIMES.
+
+           STOP RUN.
+
+       AddTwoNumbers.
+           COMPUTE resultAdd = X - Y.
+
+       DisplayResult.
+           DISPLAY "TOTAL: " resultAdd.
+
+       DisplayHello.
+           DISPLAY hello.

@@ -1,0 +1,31 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TwoDLoop.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  ROW-LIMIT PIC 9 VALUE 5.
+       01  COL-LIMIT PIC 9 VALUE 5.
+
+       01  I PIC 9 VALUE 0.
+       01  J PIC 9 VALUE 0.
+
+       01  ARRAY-ROWS.
+           05 ROW-VALUE OCCURS 5 TIMES PIC 9.
+
+       01  ARRAY-COLS.
+           05 COL-VALUE OCCURS 5 TIMES PIC 9.
+
+       PROCEDURE DIVISION.
+
+       MAIN-PROCEDURE.
+
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > ROW-LIMIT
+               MOVE I TO ROW-VALUE(I)
+
+               PERFORM VARYING J FROM 1 BY 1 UNTIL J > COL-LIMIT
+                   MOVE J TO COL-VALUE(J)
+                   DISPLAY ROW-VALUE(I) " " COL-VALUE(J)
+               END-PERFORM
+
+           END-PERFORM.
+
+           STOP RUN.

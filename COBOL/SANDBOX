@@ -1,0 +1,117 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. VARS.
+       DATA DIVISION.
+         WORKING-STORAGE SECTION.
+         01 FIRST_VAR PIC S9(3)V9(2) VALUE -125.45.
+
+         01 WORK_FIELD.
+           05 A_NUMERIC_VAL PIC X(4) VALUE 'W123'.
+           05 NUMERIC_VAL PIC 9(2) VALUE 11.
+           05 ALPHABET_VAL PIC A(3) VALUE 'QWE'.
+           05 SIGN_VAL PIC S9(2) VALUE -1.
+           05 DECIMAL_VAL PIC S9(4)V9(2) VALUE 1234.54.
+           05 SOME_TEST PIC A(3)X(2) VALUE "QWE22".
+
+         01 ARITHMETIC.
+           05 NUM_1 PIC 9(5) VALUE 10000.
+           05 NUM_2 PIC 9(5) VALUE 9999.
+           05 NUM_3 PIC 9(6) VALUE 100001.
+           05 NUM_4 PIC 9(4) VALUE 9999.
+           05 NUM_5 PIC 9(2) VALUE 10.
+           05 NUM_6 PIC 9(1) VALUE 2.
+           05 RESULT PIC S9(9).
+           05 RESULT_DIV PIC 9(9).
+           05 RESULT_MULT PIC 9(9).
+           05 RESULT_NUMERIC PIC 9(9).
+         01 STRING_ST.
+           05 VAR_STR_1 PIC A(20) VALUE
+              "qwertyuiopasdfghjkse".
+           05 VAR_STR_2 PIC A(15) VALUE "i want this job".
+       PROCEDURE DIVISION.
+           DISPLAY FIRST_VAR.
+
+           DISPLAY "Numeric value:      ", NUMERIC_VAL IN WORK_FIELD
+           DISPLAY "Alphabetic value:   ", ALPHABET_VAL IN WORK_FIELD
+           DISPLAY "Alphanumeric value: ", A_NUMERIC_VAL IN WORK_FIELD
+           DISPLAY "Sign value:         ", SIGN_VAL IN WORK_FIELD
+           DISPLAY "Decimal value:      ", DECIMAL_VAL IN WORK_FIELD
+           DISPLAY "TEST:               ", SOME_TEST IN WORK_FIELD.
+
+           COMPUTE RESULT = NUM_1 + NUM_2
+           DISPLAY "RESULT 1 is: ", RESULT.
+
+
+           DIVIDE NUM_5 BY NUM_6 GIVING RESULT_DIV
+           DISPLAY "DIVIDE RESULT is: ", RESULT_DIV.
+
+           MULTIPLY NUM_5 BY NUM_6 GIVING RESULT_MULT
+           DISPLAY "MULTIPLY RESULT is:", RESULT_MULT.
+
+           ADD NUM_5  TO NUM_6 GIVING RESULT
+           DISPLAY "ADD Result is:", RESULT.
+
+           SUBTRACT NUM_5 FROM NUM_6 GIVING RESULT
+           DISPLAY "SUBSTRACT Positive is: ", RESULT
+
+           SUBTRACT NUM_6 FROM NUM_5 GIVING RESULT
+           DISPLAY "SUBSTRACT Negative is: ", RESULT
+
+           *> i made here a test what will be in result is numeric
+           *> and result after substaction is negative
+           SUBTRACT NUM_6 FROM NUM_5 GIVING RESULT_NUMERIC
+           DISPLAY "SUBSTRACT Negative is: ", RESULT_NUMERIC
+           *> it will return right value but sign is wrong-it is missing
+
+           ADD NUM_4 IN ARITHMETIC
+              TO NUM_5 IN ARITHMETIC  *> ahh nice can do it in mult
+              GIVING RESULT IN ARITHMETIC. *> lines
+           DISPLAY "Addtional result is: ", RESULT.
+
+           MOVE NUM_6 TO NUM_2. *> ok, strange, NUM_6 get NUM_2 value
+           DISPLAY NUM_2, "  ", NUM_6. *> i though NUM_2 get NUM_6 value
+
+           INITIALIZE NUM_6
+           DISPLAY "NUM_6 after initialize: ", NUM_6.
+
+           MOVE 2 TO NUM_6
+           DISPLAY "NUM_6 if i add 2 is: ", NUM_6.
+
+           INITIALIZE NUM_6 REPLACING NUMERIC DATA BY 1
+           DISPLAY "NUM_6 after init: ", NUM_6.
+
+           *> Check if statements
+           IF NUM_1 > NUM_2 THEN
+              DISPLAY "NUM_1 is bigger then NUM_2"
+           ELSE
+              DISPLAY "NUM_2 is bigger then NUM_1"
+           END-IF. *> Dont forget to close IF statement.
+
+           *> Test NOT keywords
+           IF NOT NUM_1 < NUM_2
+              DISPLAY "NOT and IF without else"
+           END-IF. *> KK can exist without ELSE statement.
+
+           IF NUM_1 > NUM_2 AND NUM_3 > NUM_4
+              DISPLAY "CHECKING AND. Condition is True"
+           ELSE
+              DISPLAY "CHECKING AND. Condition is False"
+           END-IF.
+
+           IF NUM_1 IS POSITIVE
+              DISPLAY "U dont have any credit. Yet"
+           END-IF.
+
+           IF FIRST_VAR IS NOT POSITIVE
+              DISPLAY "Now u have a credit. good luck"
+
+           EVALUATE TRUE
+              WHEN FIRST_VAR IS POSITIVE
+                 DISPLAY "FIRST_VAR is positive"
+              WHEN FIRST_VAR IS NEGATIVE
+                 DISPLAY "FIRST_VAR is negative"
+              WHEN FIRST_VAR  < 0         *> It will not executed
+                 DISPLAY "Is less than 0" *> because one cond is already
+           END-EVALUATE.                  *> True
+           *>***********************************************************
+           *> Work with
+           STOP RUN.
